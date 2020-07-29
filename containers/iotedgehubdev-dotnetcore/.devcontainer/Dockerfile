@@ -48,12 +48,7 @@ RUN apt-get update \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
-# [Optional] Uncomment this section to install additional OS packages.
-# RUN apt-get update \
-#     && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends <your-package-list-here>
-
-# Set up Edge Simulator
+# Set up Azure IoT Edge Simulator
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-transport-https \
     && apt-get -y install --no-install-recommends python3-pip \
@@ -64,6 +59,7 @@ RUN apt-get update \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
+# Install .NET Core 3.1 SDK
 RUN wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
     && dpkg -i packages-microsoft-prod.deb \
     && apt-get update \
@@ -72,6 +68,11 @@ RUN wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-p
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
+
+# [Optional] Uncomment this section to install additional OS packages.
+# RUN apt-get update \
+#     && export DEBIAN_FRONTEND=noninteractive \
+#     && apt-get -y install --no-install-recommends <your-package-list-here>
 
 # Setting the ENTRYPOINT to docker-init.sh will configure non-root access to 
 # the Docker socket if "overrideCommand": false is set in devcontainer.json. 
